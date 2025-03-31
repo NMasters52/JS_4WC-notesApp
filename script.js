@@ -4,12 +4,13 @@ const elements = {
     displayNotes: document.getElementById('notesDisplay')
 }
 
-const savedNotes = [];
+let savedNotes = [];
 
 function saveNoteHandler() {
     const newNote = elements.input.value;
     savedNotes.push(newNote);
     elements.input.value ='';
+    saveNotes();
    displayNotes();
 }
 
@@ -22,7 +23,20 @@ function displayNotes() {
     })
 }
 
+function saveNotes() {
+    localStorage.setItem("notes", JSON.stringify(savedNotes));
+}
+
+function getNotes(){
+  let storedNotes = localStorage.getItem("notes");
+   if (storedNotes) {
+   savedNotes =  JSON.parse(storedNotes);
+   }
+}
+
 function initializeApp() {
+    getNotes();
+    displayNotes();
     elements.btnSaveNote.addEventListener('click', saveNoteHandler);
 }
 
