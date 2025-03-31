@@ -7,8 +7,8 @@ const elements = {
 let savedNotes = [];
 
 function saveNoteHandler() {
-    const newNote = elements.input.value;
-    savedNotes.push(newNote);
+    let note = new Note(elements.input.value);
+    savedNotes.push(note);
     elements.input.value ='';
     saveNotes();
    displayNotes();
@@ -18,7 +18,7 @@ function displayNotes() {
     elements.displayNotes.innerHTML ='';
     savedNotes.map(note => {
       const  listItem = document.createElement('p')
-        listItem.innerText = note;
+        listItem.innerText = note.text;
         elements.displayNotes.appendChild(listItem);
     })
 }
@@ -30,8 +30,16 @@ function saveNotes() {
 function getNotes(){
   let storedNotes = localStorage.getItem("notes");
    if (storedNotes) {
-   savedNotes =  JSON.parse(storedNotes);
+ const  parsedNotes =  JSON.parse(storedNotes);
+ savedNotes = parsedNotes.map(note => new Note(note.text, note.id));
    }
+}
+
+class Note {
+    constructor(text, id) {
+        this.id = id || crypto.randomUUID();
+        this.text = text || "no id";
+    }
 }
 
 function initializeApp() {
