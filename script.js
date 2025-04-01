@@ -37,9 +37,18 @@ function saveNotes() {
 
 function getNotes(){
   let storedNotes = localStorage.getItem("notes");
-   if (storedNotes) {
-  savedNotes =  JSON.parse(storedNotes);
-   }
+    if (storedNotes) {
+        try {
+            savedNotes = JSON.parse(storedNotes);  
+    } catch (error) {
+            console.error("Error parsing notes from localStorage:", error);
+            savedNotes = [];
+        }
+  } else {
+    savedNotes = [];
+  }
+ 
+
 }
 
 
