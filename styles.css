@@ -1,0 +1,9 @@
+.note-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.note-item button {
+    height: 10%;
+}
