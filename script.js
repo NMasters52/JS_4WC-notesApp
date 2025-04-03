@@ -49,9 +49,17 @@ function displayNotes() {
 
 function deleteBtnHandler(noteId) {
     const index = savedNotes.findIndex(note => noteId === note.id);
-    savedNotes.splice(index, 1);
-    saveNotes();
-    displayNotes();
+    if (index !== -1) {
+        try {
+            savedNotes.splice(index, 1);
+            saveNotes();
+            displayNotes();
+        } catch (error) {
+            console.error(error);
+        }
+    } else {
+        console.log(`Notes with the ID of ${noteId} could not be found`);
+    }
 }
 
 function editNote(noteId) {
