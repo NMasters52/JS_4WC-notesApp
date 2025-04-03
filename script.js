@@ -25,18 +25,33 @@ function saveNoteHandler() {
 function displayNotes() {
     elements.displayNotes.innerHTML ='';
     savedNotes.forEach(note => {
+        //create div for notes 
         const noteDiv = document.createElement('div');
         elements.displayNotes.appendChild(noteDiv);
         noteDiv.classList.add('note-item');
+        //add note text 
         let  listItem = document.createElement('p')
         listItem.innerText = note.text;
         listItem.id = note.id;
         noteDiv.appendChild(listItem);
+        //add edit btn
         let editBtn = document.createElement('button');
         editBtn.innerText = "edit";
         editBtn.addEventListener('click', () => editNote(note.id));
         noteDiv.appendChild(editBtn);
+        //add delete btn
+        let deleteBtn = document.createElement('button');
+        deleteBtn.innerText = "delete";
+        deleteBtn.addEventListener('click', (() => deleteBtnHandler(note.id) ));
+        noteDiv.appendChild(deleteBtn);
     })
+}
+
+function deleteBtnHandler(noteId) {
+    const index = savedNotes.findIndex(note => noteId === note.id);
+    savedNotes.splice(index, 1);
+    saveNotes();
+    displayNotes();
 }
 
 function editNote(noteId) {
