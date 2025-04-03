@@ -78,7 +78,7 @@ function editNote(noteId) {
             console.log(error)
         }
     } else {
-        listItem.innerText = `${this.text}. edit failed.`;
+        listItem.innerText = `Edit failed for Note with the ID ${noteId}.`;
     }
 }
 
