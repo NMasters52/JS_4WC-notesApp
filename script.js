@@ -36,9 +36,7 @@ function displayNotes() {
         const editBtn = createElement('button', "edit", () => editNote(note.id));
         noteDiv.appendChild(editBtn);
         //add delete btn
-        let deleteBtn = document.createElement('button');
-        deleteBtn.innerText = "delete";
-        deleteBtn.addEventListener('click', (() => deleteBtnHandler(note.id) ));
+        const deleteBtn = createElement('button', "delete", () => deleteBtnHandler(note.id));
         noteDiv.appendChild(deleteBtn);
     })
 }
