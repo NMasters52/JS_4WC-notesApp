@@ -33,9 +33,7 @@ function displayNotes() {
         const listItem = createElement('p', note.text, null, note.id);
         noteDiv.appendChild(listItem);
         //add edit btn
-        let editBtn = document.createElement('button');
-        editBtn.innerText = "edit";
-        editBtn.addEventListener('click', () => editNote(note.id));
+        const editBtn = createElement('button', "edit", () => editNote(note.id));
         noteDiv.appendChild(editBtn);
         //add delete btn
         let deleteBtn = document.createElement('button');
