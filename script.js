@@ -30,9 +30,7 @@ function displayNotes() {
         elements.displayNotes.appendChild(noteDiv);
         noteDiv.classList.add('note-item');
         //add note text 
-        let  listItem = document.createElement('p')
-        listItem.innerText = note.text;
-        listItem.id = note.id;
+        const listItem = createElement('p', note.text, null, note.id);
         noteDiv.appendChild(listItem);
         //add edit btn
         let editBtn = document.createElement('button');
@@ -45,6 +43,20 @@ function displayNotes() {
         deleteBtn.addEventListener('click', (() => deleteBtnHandler(note.id) ));
         noteDiv.appendChild(deleteBtn);
     })
+}
+
+function createElement(el, text, event, id) {
+    const element = document.createElement(el);
+    if (text) {
+        element.innerText = text;
+    }
+    if (id) {
+        element.id = id;
+    }
+    if (event) {
+        element.addEventListener('click', event);
+    }
+    return element;
 }
 
 function deleteBtnHandler(noteId) {
